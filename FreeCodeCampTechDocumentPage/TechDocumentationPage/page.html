@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="style.css">
+<header id="header">
+    <nav id="navbar">
+        
+        <ul class='navbar'>
+            <img src="https://banner2.cleanpng.com/20180506/ile/kisspng-python-programming-language-computer-programming-5aefaba25ef4a4.302516281525656482389.jpg">
+            <header>Python</header>
+            <li><a class="nav-link" href='#Introduction'>Introduction</a></li>
+            <li><a class="nav-link" href='#Installing_Python'>Installing Python</a></li>
+            <li><a class="nav-link" href='#The_Basics_of_Python'>The Basics of Python</a></li>
+            <li><a class="nav-link" href='#Learning_Python'>Learning Python</a></li>
+            <li><a class="nav-link" href='#FAQ'>FAQ</a></li>
+            <li><a class="nav-link" href='#Help'>Help</a></li>
+            <li><a class="nav-link" href='#Contribute'>Contribute</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main id="main-doc">
+    <section class="main-section" id="Introduction">
+        <header>Introduction</header>
+            <p>
+                Python is a cross-platform, object-oriented, dynamic language.Designed for ease of use and to be readable even to the beginning programmer, Python is a perfect language for any novice programmer. 
+            </p>
+
+            <p>
+                Don't think however that because this is so, that you cannot make some impressive things with Python; on the contrary, Python is a powerful language that can be used for just about any large-scale programming project.
+            </p>
+    </section>
+
+    <section class="main-section" id="Installing_Python">
+        <header>Installing Python</header>
+            <p>
+                Installing Python is very easy to do, and many UNIX & Linux distributions come with Python as an initial package. Sometimes, even some Windows computers already come with Python installed. If you do need to install it, however, feel free to follow <a href="http://wiki.python.org/moin/BeginnersGuide/Download">this link</a> to do so.
+            </p>
+    </section>
+
+    <section class="main-section" id="The_Basics_of_Python">
+        <header>The Basics of Python</header>
+        <p>
+            One of the most important things to know about Python is that everything in Python is an object, derived from one of Python's built-in Types.
+        </p>
+
+        <p>
+            Python's built-in types are: 
+        </p>
+
+        <ul>
+            <li><a href="#Numerics">Numerics</a></li>
+            <li><a href="#Sequences">Sequences</a></li>
+            <li><a href="#Mappings">Mappings</a></li>
+            <li><a href="#Classes">Classes</a></li>
+            <li><a href="#Instances">Instances</a></li>
+            <li><a href="#Exceptions">Exceptions</a></li>
+        </ul>
+
+        <h3 id="Numerics">Numerics</h3>
+
+            <p>Python has three distinct numeric types:</p>
+
+            <ul>
+                <li><code>int</code> - integers</li>
+                <li><code>float</code> - floating point numbers</li>
+                <li><code>complex</code> - complex numbers</li>
+            </ul>
+
+            <p>
+                Numerics are used for to store numbers, whether coming from a function or something you might need later on. You can do everything from simple to complex math using Numerics. 
+            </p>
+
+            <p>
+                Like most things in Python, they are easy to create:
+            </p>
+
+            <p><code>a = 5</code></p>
+            <p><code>type(a)</code></p>
+            <p><code>>>> class 'int'</code></p>
+
+            <p>
+                The above code creates an "a" variable, and because we placed the integer 5 in it, it is now a instance of the "int" class. 
+            </p>
+
+        
+        <h3 id="Sequences">Sequences</h3>
+
+            <p>Python has three basic sequence types:</p>
+
+            <ul>
+                <li><code>list</code> - list</li>
+                <li><code>tuple</code> - tuple</li>
+                <li><code>range</code> - range</li>
+            </ul>
+
+            <p>
+                Sequences are the generic term for an ordered set. The three listed above change in mutability, but like are great for storing all kinds of data.
+            </p>
+
+            <h5>Lists</h5>
+            <p>Lists are the most versatile sequence type. Lists are mutable, and any object can be put in one. Elements within can be reassigned, removed or inserted.</p>
+            <h5>Tuples</h5>
+            <p>Tuples are very similar to Lists, but they are immutable; once made, they cannot be changed. This makes them perfect for data you want stored but don't want to put at risk of being changed by code.</p>
+            <h5>Strings</h5>
+            <p>These are special type of sequence that can only store characters. Most use them to store words that you might want printed to the user as well.</p>
+
+
+        <h3 id="Mappings">Mappings</h3>
+
+            <p>Mappings are mutable objects that map hashable values to arbitrary objects.</p>
+            <p>Python actually only has one mapping object:</p>
+            <ul>
+                <li><code>dict</code> - dictionaries</li>
+            </ul>
+
+            <h5>Dictionaries</h5>
+            <p>
+                Dictonaries, much like their namesake, consist of key and value pairs. If a dictionary key is called, it will return its value. Likewise, if a dictionary value is called, it will return whatever key is associated with it.
+            </p>
+            <p><code>a = {'first':15, 'second':30}</code></p>
+            <p><code>a.keys()</code></p>
+            <p><code>>>> dict_keys(['first', 'second'])</code></p>
+            <p><code>a.values()</code></p>
+            <p><code>>>> dict_values([15, 30])</code></p>
+
+
+        <h3 id="Classes">Classes</h3>
+
+            <p>
+                A class is best described as a code template for creating objects. They are created by using the constructor of the class. Objects called this way are called an instance of the class. 
+            </p>
+            <p>
+                If you'll remember, everything in Python is an object. This means they also belong to a class and are thus instances of those classes. 
+            </p>
+            <p>
+                Classes also have special operations called methods, which are functions that only instances of the class they are associated with can use. 
+            </p>
+            <p>
+                Classes allow you to use a form of programming called Object Oriented Programming, which opens up a brand new way for you to make programs from the traditional functional programming.
+            </p>
+            <h5>Make a class</h5>
+            <p><code>class Snake:</code></p>
+            <p><code>   name = "python"</code></p>
+            <h5>Create a class instance</h5>
+            <p><code>snake = Snake()</code></p>
+            <h5>Access class attribute name inside class</h5>
+            <p><code>print(snake.name)</code></p>
+            <p><code>>>> python</code></p>
+
+
+        <h3 id="Instances">Instances</h3>
+
+            <p>
+                As described in <a href="#Classes">Classes</a>, Instances are an individual object of a certain class. An object that belongs to a class Person, for example, is an instance of the class Person, with all the methods and characteristics that belong to all instances of that class.
+            </p>
+
+        <h3 id="Exceptions">Exceptions</h3> 
+
+            <p>
+                An exception is an event which occurs during the execution of a program that disrupts the normal flow of the program's instructions. When such an event occurs and a Python script encounters a situation that it cannot cope with, it raises an exception. An Exception then is a Python object that represents an error.
+            </p>
+
+            <p>
+                Common exceptions in Python include:
+            </p>
+            <ul>
+                <li><code>ImportError</code></li>
+                <li><code>NameError</code></li>
+                <li><code>SyntaxError</code></li>
+                <li><code>TypeError</code></li>
+                <li><code>PermissionError</code></li>
+            </ul>
+    </section>
+
+    <section class="main-section" id="Learning_Python">
+        <header>Learning Python</header>
+            <p>
+                Voted as the most popular programming language by <a href="https://www.northeastern.edu/graduate/blog/most-popular-programming-languages/">northeastern.edu</a>, Python thus has numerous websites, Youtube channels, and books dedicated to getting you up & running as soon as possible.
+            </p>
+
+            <p>
+                This online documentation is your first step on the road to becoming a great Python programmer. You can also check out the following resources:
+            </p>
+
+            <ul>
+                <li><a href="https://www.freecodecamp.com">FreeCodeCamp</a></li>
+                <li><a href="https://www.codeacademy.com">Codeacademy</a></li>
+                <li><a href="https://www.realpython.com">RealPython</a></li>
+                <li><a href="https://www.afterhoursprogramming.com/">After Hours Programming</a></li>
+                <li><a href="https://www.learnpython.org">Learn Python</a></li>
+            </ul>
+    </section>
+
+    <section class="main-section" id="FAQ">
+        <header>FAQ</header>
+            <p>
+                Have a question? Browse the <a href="http://docs.python.org/3/faq/">FAQ</a> page to find the answers to some of the most commonly asked questions about Python.
+            </p>
+
+            <p>
+                We also recommend using <a href="https://stackoverflow.com">StackOverflow</a> for many of your programming questions. It features a very active, vibrant community of programmers who are always looking to help answer whatever question you might have.
+            </p>
+            
+            <p>
+                You can also check out this <a href="http://wiki.python.org/moin/BeginnersGuide/Programmers">Beginners Guide</a> to Python to learn the basics of the language.
+            </p>
+    </section>
+
+    <section class="main-section" id="Help">
+        <header>Help</header>
+            <p>
+                If the FAQ doesn't have the answers you need, there's plenty of information out there that is just a mere Google search away. Python also has a <a href="news:comp.lang.python">Newsgroup</a> available where someone will almost certainly be able to put you on the right track.
+            </p>
+    </section>
+
+    <section class="main-section" id="Contribute">
+        <header>Contribute</header>
+            <p>
+                If you want to help with Python's development, you can check out the <a href="https://www.python.org/dev/">Developer area</a>.
+            </p>
+
+            <p>
+                You don't have to be an expert programmer to help! 
+                You can always help out with Python's documentation, to help out beginners learning Python!
+            </p>
+    </section>
+</main>

@@ -1,0 +1,54 @@
+header {
+    color: rgb(114, 168, 210)
+}
+
+h3 {
+    color: rgb(114, 168, 210)
+}
+
+main {
+    background-color: black;
+    color: white;
+    margin-left: 200px;
+}
+
+img {
+    height: 75px;
+    width: 75px;
+    background-color: black;
+}
+#navbar {
+    height: 100%;
+    width: 12%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    background-color: black;
+}
+
+.navbar ul {
+    display:inline-block;
+}
+
+.navbar li {
+    text-decoration: none;
+    font-size: 25px;
+    display: block;
+}
+
+.navbar header {
+    font-size: 25px;
+    display: block;
+}
+
+.main-section {
+    padding-left: 10px;
+    padding-bottom: 15px;
+}
+
+@media only screen and (max-width: 600px) {
+    display: none;
+    }
+  }
