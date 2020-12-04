@@ -65,43 +65,43 @@ class Category:
             return False
 
     def __str__(self):
-        balance = 0
-        transactions = []
-        nl = '\n'
-        header = self.category.center(30, '*')
+        balance = 0 #to uptick and collect correct balance
+        transactions = [] # to hold transaction log strings
+        nl = '\n' #cannot place newlines in fstrings
+        header = self.category.center(30, '*') #for first line.
+        #center(string length, what to fill it with) creates a centered string with "title"
         for item in self.ledger:
-            transaction = item['amount']
-            balance += transaction
-            item['amount'] = '{:.2f}'.format(item['amount'])
-            description = '{:<23}'.format(item['description'])
-            amount = '{:>7}'.format(item['amount'])
-            transactions.append(f'{description}{amount}')
-        total = f'Total: {balance}'
-        return f"{header}\n{nl.join(tuple(transactions))}\n{total}"
-
-def create_spend_chart():
-    pass
-
-
-food = Category('Food')
-food.deposit(1000, 'Payday')
-food.withdraw(50, 'groceries')
-food.withdraw(175, 'dinner out with friends')
-food.withdraw(50, 'bacon, eggs, vegetables, fruits and salad for breakfast')
-print(food)
+            transaction = item['amount'] #needed because past this loop amount stores as string
+            balance += transaction #uptick balance with each transaction amount.
+            item['amount'] = '{:.2f}'.format(item['amount']) #amount is formatted to two decimal places.
+            description = item['description'][:23] #truncate item desciption to max 23 characters
+            amount = item['amount'][:7] #truncate amount description to max 7 characters
+            transactions.append(f'{description:<23}{amount:>7}') #Append a f string to fit to 30 characters total
+        total = f'Total: {balance}' #creates a fstring for the balance total
+        return f"{header}\n{nl.join(tuple(transactions))}\n{total}" #returns a completed fstring for each item in list.
+        #note that because we need to return a list of strings, we can use nl.join(tuple(list)) in order
+        #release each item in the list as a string. Python can unpack tuples at runtime.
+def create_spend_chart(Categories):
+    print("Percentage spent by category")
 
 
-''' THIS IS THE ORIGINAL VERSION OF THE CODE
-def __str__(self):
-        balance = 0
-        transactions = []
-        nl = '\n'
-        header = self.category.center(30, '*')
-        for item in self.ledger:
-            transaction = item['amount']
-            balance += transaction
-            item['amount'] = '{:.2f}'.format(item['amount'])
-            transactions.append(f"{item['description']:<23}{item['amount']:>7}")
-        total = f'Total: {balance}'
-        return f"{header}\n{nl.join(tuple(transactions))}\n{total}"
-'''
+def get_percentage(new, old):
+    if new == old:
+        return 100
+    try: 
+        return (abs(new-old) / old * 100)
+    except ZeroDivisionError:
+        return 0
+
+def get_percentage_string(num): #You call get_percentage with your values as an argument in this function.
+    return f'{round(num, -1)}%' #rounds down to nearest tenth place
+#I need to add all the positive values in the ledger and all the negative values in the ledger in order to get the difference between the two. Then I can feed those values into get percentage.
+
+def get_deposit_sum(Category):
+    return int(sum([x['amount'] for x in Category.ledger if x['amount'] > 0]))
+
+def get_withdraw_sum(Category):
+    return int(abs(sum([x['amount'] for x in Category.ledger if x['amount'] < 0])))
+
+
+
