@@ -1,4 +1,4 @@
-[] Complete Category class in budget.
+     [] Complete Category class in budget.
 
 [x] Class should have an instance variable called ledger that is a list. 
 
@@ -35,8 +35,8 @@ When printed should print out in printed format.
     [] Read thru the ledger of each category passed in 
     [x] Read only the withdrawals, not deposits
     [x] Find some way to calculate percentage
-    [] Find some way to print out the percentage measurements on the left hand side
-    [] Print out a corresponding 'o' for each percentage bar
-    [] Print out a horizontal line exactly two spaces past the final bar
-    [] Find some way to print out the category line in a horizontal fashion
+    [x] Find some way to print out the percentage measurements on the left hand side
+    [x] Print out a corresponding 'o' for each percentage bar
+    [x] Print out a horizontal line exactly two spaces past the final bar
+    [x] Find some way to print out the category line in a horizontal fashion
 

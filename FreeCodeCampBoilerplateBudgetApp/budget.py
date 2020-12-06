@@ -77,15 +77,25 @@ class Category:
             description = item['description'][:23] #truncate item desciption to max 23 characters
             amount = item['amount'][:7] #truncate amount description to max 7 characters
             transactions.append(f'{description:<23}{amount:>7}') #Append a f string to fit to 30 characters total
-        total = f'Total: {balance}' #creates a fstring for the balance total
+        total = f'Total: {int(balance):.2f}' #creates a fstring for the balance total
         return f"{header}\n{nl.join(tuple(transactions))}\n{total}" #returns a completed fstring for each item in list.
         #note that because we need to return a list of strings, we can use nl.join(tuple(list)) in order
         #release each item in the list as a string. Python can unpack tuples at runtime.
-def create_spend_chart(Categories):
-    print("Percentage spent by category")
 
 
-def get_percentage(new, old):
+
+#Non-class functions
+
+def create_spend_chart(Categories, name): #Will need to be composed of different parts
+    deposits = get_deposit_sum(Categories)
+    withdraws = get_withdraw_sum(Categories)
+    balance = get_new_balance(deposits, withdraws)
+    percentage = get_percentage_string(get_percentage(balance, deposits))
+    category = name
+    return compose_string_list(percentage, category)
+
+
+def get_percentage(new, old): #return percentage in decimal format
     if new == old:
         return 100
     try: 
@@ -94,14 +104,40 @@ def get_percentage(new, old):
         return 0
 
 def get_percentage_string(num): #You call get_percentage with your values as an argument in this function.
-    return f'{round(num, -1)}%' #rounds down to nearest tenth place
+    return f'{round(num, -1)}' #rounds down to nearest tenth place
 #I need to add all the positive values in the ledger and all the negative values in the ledger in order to get the difference between the two. Then I can feed those values into get percentage.
 
-def get_deposit_sum(Category):
-    return int(sum([x['amount'] for x in Category.ledger if x['amount'] > 0]))
+def get_deposit_sum(Category): #Returns all deposits
+    return int(sum([x['amount'] for x in Category.ledger if float(x['amount']) > 0]))
 
-def get_withdraw_sum(Category):
-    return int(abs(sum([x['amount'] for x in Category.ledger if x['amount'] < 0])))
+def get_withdraw_sum(Category): #Returns all withdrawals
+    return int(abs(sum([x['amount'] for x in Category.ledger if float(x['amount']) < 0])))
 
+def get_new_balance(num1, num2): #Feed get_deposit_sum and get_withdraw_sum in that order for balance after all withdrawls
+    return num1 - num2
 
+#I will need to find a way to create custom made strings that will contain the necessary 
+#information; variables for each line.
 
+def compose_string_list(num, category):
+    status_strings = []
+    percentage = 100
+    status_strings.append('Percentage spent by category')
+    for i in range(1, 12):
+        status_strings.append(make_string(num, percentage))
+        percentage -= 10
+    status_strings.append('')
+    status_strings.append('-' * 30)
+    for letter in category:
+        status_strings.append('     ' + letter)
+    return status_strings    
+
+def make_string(num, percentage):
+    if percentage == 0:
+        return f"{'  '+ str(percentage)}| {'o' if percentage <= float(num) else ' '}"
+    elif percentage < 100 and percentage > 0:
+        return f"{' '+ str(percentage)}| {'o' if percentage <= float(num) else ' '}"
+    else:
+        return f"{percentage}| {'o' if percentage <= float(num) else ' '}"
+
+#return f"{str(percentage)}| {'o' if percentage <= float(num) else ' '}".rjust(3)
