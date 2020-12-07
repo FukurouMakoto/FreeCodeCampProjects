@@ -134,10 +134,10 @@ def compose_string_list(num, category):
 
 def make_string(num, percentage):
     if percentage == 0:
-        return f"{'  '+ str(percentage)}| {'o' if percentage <= float(num) else ' '}"
+        return f"{'  '+ str(percentage)}| {'o' if percentage <= float(num) else ' '}".ljust(30)
     elif percentage < 100 and percentage > 0:
-        return f"{' '+ str(percentage)}| {'o' if percentage <= float(num) else ' '}"
+        return f"{' '+ str(percentage)}| {'o' if percentage <= float(num) else ' '}".ljust(30)
     else:
-        return f"{percentage}| {'o' if percentage <= float(num) else ' '}"
+        return f"{percentage}| {'o' if percentage <= float(num) else ' '}".ljust(30)
 
 #return f"{str(percentage)}| {'o' if percentage <= float(num) else ' '}".rjust(3)
