@@ -87,9 +87,8 @@ class Category:
 #Non-class functions
 def create_spend_chart(category_list):
     if isinstance(category_list, list):
-        total_items = len(category_list)
         for item in category_list:
-            return compose_chart(item, total_items)
+            return compose_chart(item)
     elif isinstance(category_list, Category):
         return compose_chart(category_list)
     else:
@@ -99,13 +98,13 @@ def print_spend_chart(charts):
     for line in charts:
         print(line)
 
-def compose_chart(Category, total_items=1): #Will need to be composed of different parts
+def compose_chart(Category): #Will need to be composed of different parts
     deposits = get_deposit_sum(Category)
     withdraws = get_withdraw_sum(Category)
     balance = get_new_balance(deposits, withdraws)
     percentage = get_percentage_string(get_percentage(balance, deposits))
     category = Category.category
-    return compose_string_list(percentage, category, total_items=1)
+    return compose_string_list(percentage, category)
 
 
 def get_percentage(new, old): #return percentage in decimal format
@@ -132,12 +131,12 @@ def get_new_balance(num1, num2): #Feed get_deposit_sum and get_withdraw_sum in t
 #I will need to find a way to create custom made strings that will contain the necessary 
 #information; variables for each line.
 
-def compose_string_list(num, category, total_items=1):
+def compose_string_list(num, category):
     status_strings = []
     percentage = 100
     status_strings.append('Percentage spent by category'.ljust(30))
     while percentage >= 0:
-        status_strings.append(make_string(num, percentage, total_items=1))
+        status_strings.append(make_string(num, percentage))
         percentage -= 10
     status_strings.append('')
     status_strings.append('-' * 30)
@@ -145,17 +144,16 @@ def compose_string_list(num, category, total_items=1):
         status_strings.append('     ' + letter)
     return status_strings    
 
-def create_bars(num, percentage, number_of_items):
-    return f"{'o' if percentage <= float(num) else ' '}" * number_of_items   
+def create_bars(num, percentage):
+    return f"{'o' if percentage <= float(num) else ' '}"   
 
-def make_string(num, percentage, total_items=1):
-    full_bars = create_bars(num, percentage, total_items)
+def make_string(num, percentage):
     if percentage == 0:
-        return f"{'  '+ str(percentage)}| {full_bars}".ljust(30)
+        return f"{'  '+ str(percentage)}| {create_bars(num, percentage)}".ljust(30)
     elif percentage < 100 and percentage > 0:
-        return f"{' '+ str(percentage)}| {full_bars}".ljust(30)
+        return f"{' '+ str(percentage)}| {create_bars(num, percentage)}".ljust(30)
     else:
-        return f"{percentage}| {full_bars}".ljust(30)
+        return f"{percentage}| {create_bars(num, percentage)}".ljust(30)
 
 '''
 maybe set a variable here that is equal to {'o', if percentage...}, and multiply it 

@@ -25,7 +25,11 @@ Auto.withdraw(300.00, 'new tires')
 
 #print(food)
 category_list = [food, Clothes, Auto]
-print_spend_chart(create_spend_chart(category_list))
+
+for item in category_list:
+    print_spend_chart(create_spend_chart(item))
+    print('')
+    print('')
 
 '''
 for line in fuck_around[1:11]:
