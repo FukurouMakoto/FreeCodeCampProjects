@@ -85,14 +85,27 @@ class Category:
 
 
 #Non-class functions
+def create_spend_chart(category_list):
+    if isinstance(category_list, list):
+        total_items = len(category_list)
+        for item in category_list:
+            return compose_chart(item, total_items)
+    elif isinstance(category_list, Category):
+        return compose_chart(category_list)
+    else:
+        raise Exception("Invalid item...")
 
-def create_spend_chart(Categories, name): #Will need to be composed of different parts
-    deposits = get_deposit_sum(Categories)
-    withdraws = get_withdraw_sum(Categories)
+def print_spend_chart(charts):
+    for line in charts:
+        print(line)
+
+def compose_chart(Category, total_items=1): #Will need to be composed of different parts
+    deposits = get_deposit_sum(Category)
+    withdraws = get_withdraw_sum(Category)
     balance = get_new_balance(deposits, withdraws)
     percentage = get_percentage_string(get_percentage(balance, deposits))
-    category = name
-    return compose_string_list(percentage, category)
+    category = Category.category
+    return compose_string_list(percentage, category, total_items=1)
 
 
 def get_percentage(new, old): #return percentage in decimal format
@@ -119,12 +132,12 @@ def get_new_balance(num1, num2): #Feed get_deposit_sum and get_withdraw_sum in t
 #I will need to find a way to create custom made strings that will contain the necessary 
 #information; variables for each line.
 
-def compose_string_list(num, category):
+def compose_string_list(num, category, total_items=1):
     status_strings = []
     percentage = 100
-    status_strings.append('Percentage spent by category')
-    for i in range(1, 12):
-        status_strings.append(make_string(num, percentage))
+    status_strings.append('Percentage spent by category'.ljust(30))
+    while percentage >= 0:
+        status_strings.append(make_string(num, percentage, total_items=1))
         percentage -= 10
     status_strings.append('')
     status_strings.append('-' * 30)
@@ -132,12 +145,26 @@ def compose_string_list(num, category):
         status_strings.append('     ' + letter)
     return status_strings    
 
-def make_string(num, percentage):
-    if percentage == 0:
-        return f"{'  '+ str(percentage)}| {'o' if percentage <= float(num) else ' '}".ljust(30)
-    elif percentage < 100 and percentage > 0:
-        return f"{' '+ str(percentage)}| {'o' if percentage <= float(num) else ' '}".ljust(30)
-    else:
-        return f"{percentage}| {'o' if percentage <= float(num) else ' '}".ljust(30)
+def create_bars(num, percentage, number_of_items):
+    return f"{'o' if percentage <= float(num) else ' '}" * number_of_items   
 
-#return f"{str(percentage)}| {'o' if percentage <= float(num) else ' '}".rjust(3)
+def make_string(num, percentage, total_items=1):
+    full_bars = create_bars(num, percentage, total_items)
+    if percentage == 0:
+        return f"{'  '+ str(percentage)}| {full_bars}".ljust(30)
+    elif percentage < 100 and percentage > 0:
+        return f"{' '+ str(percentage)}| {full_bars}".ljust(30)
+    else:
+        return f"{percentage}| {full_bars}".ljust(30)
+
+'''
+maybe set a variable here that is equal to {'o', if percentage...}, and multiply it 
+by the len of list?
+Need to figure out some way where I can work the make string function into taking 
+a number and multiply create_bars by it. Maybe by putting them in a list?
+I cannot pass in a simple len(list). I need to find a way where I can tell
+python to not only do create_bars for every item in the list, 
+but to do it for each item in the list.
+I think I need to look into making some of these functions into class options instead. 
+That might help not only to make the code work but also make it cleaner.
+'''
