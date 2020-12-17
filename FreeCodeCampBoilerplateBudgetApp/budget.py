@@ -1,8 +1,11 @@
+from itertools import zip_longest
 class Category:
     def __init__(self, category):
         self.category = category
         self.budget = 0
         self.ledger = []
+        #self.budget_used = 0
+        #self.percentage_spent = 0
 
     def check_funds(self, amount):
         if amount > self.budget:
@@ -85,7 +88,7 @@ class Category:
 
 
 #Non-class functions
-def create_spend_chart(category_list):
+def create_spend_chart_mine(category_list):
     if isinstance(category_list, list):
         for item in category_list:
             return compose_chart(item)
@@ -155,6 +158,28 @@ def make_string(num, percentage):
     else:
         return f"{percentage}| {create_bars(num, percentage)}".ljust(30)
 
+def get_percentage_spent(Category):
+    deposits = get_deposit_sum(Category)
+    withdraws = get_withdraw_sum(Category)
+    balance = get_new_balance(deposits, withdraws)
+    percentage = get_percentage(balance, deposits)
+    return round(percentage, -1)
+
+def chart_string(cat:Category):
+    num_os = int((get_percentage_spent(cat)) / 10 + 1)
+    os = "o" * num_os
+    return os.rjust(11) + '-' + cat.category
+
+def create_spend_chart(categories):
+    filler = "\n".ljust(12) + "-\n"
+    wide_string = filler.join([chart_string(c) for c in categories])
+    data = [''.join(s) for s in zip_longest(*wide_string.split('\n'), fillvalue=" ")]
+    y_axis = [str(p).rjust(3) + "|" for p in range(100, -1, -10)]
+    chart = "\n".join([
+        ax + d 
+        for ax, d in zip_longest(y_axis, data, fillvalue="    ")
+    ])
+    return chart 
 '''
 maybe set a variable here that is equal to {'o', if percentage...}, and multiply it 
 by the len of list?
